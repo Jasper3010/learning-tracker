@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Press_Start_2P } from 'next/font/google';
 
@@ -51,6 +52,10 @@ export default function Home() {
   ]);
 
   useEffect(() => {
+    document.title = "PROB's Dev Path";
+  }, []);
+
+  useEffect(() => {
     const storedSections = localStorage.getItem("sections");
     if (storedSections) {
       setSections(JSON.parse(storedSections));
@@ -82,24 +87,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[url('/space-bg.jpg')] bg-cover bg-center bg-fixed text-white font-mono"> 
       <div className="p-6 max-w-3xl mx-auto bg-opacity-30 bg-black backdrop-blur-lg shadow-xl rounded-lg border border-blue-500"> 
-        <h1 className={`text-3xl font-bold mb-6 text-center text-blue-400 flex items-center justify-center ${pixelFont.className}`}>
-          🚀 PROB's Full-Stack Developer 🌌
-        </h1>
+        <h1 className={`text-3xl font-bold mb-6 text-center text-blue-400 flex items-center justify-center ${pixelFont.className}`}>🚀 PROB&apos;s Dev Path 🌌</h1>
         
         {sections.map(section => (
           <div key={section.name} className="mb-6">
             <h2 className="text-xl font-semibold mb-2 text-yellow-300 border-b border-yellow-300 pb-1">{section.name}</h2>
             {section.tasks.map(task => (
               <Card key={task.id} className="mb-3 bg-opacity-30 bg-black backdrop-blur-lg border border-purple-500 shadow-lg shadow-purple-500/50"> 
-                <CardContent className="flex items-center justify-between p-4">
-                  <input type="checkbox" checked={task.completed} onChange={() => toggleTaskCompletion(section.name, task.id)} className="mr-2 accent-yellow-300" />
-                  <div className="flex-1">
-                    <p className={task.completed ? "line-through text-gray-400" : "text-white font-semibold"}>{task.name}</p>
-                    <Input type="text" value={task.startTime || ""} onChange={(e) => updateTaskField(section.name, task.id, "startTime", e.target.value)} placeholder="Nhập ngày bắt đầu..." className="border p-1 text-sm mt-2 bg-transparent text-yellow-300 placeholder-gray-500 border-yellow-300" />
-                    <Input type="text" value={task.deadline || ""} onChange={(e) => updateTaskField(section.name, task.id, "deadline", e.target.value)} placeholder="Nhập deadline..." className="border p-1 text-sm mt-2 bg-transparent text-red-300 placeholder-gray-500 border-red-300" />
-                    {task.completed && <p className="text-sm text-gray-400">Hoàn thành: {task.endTime}</p>}
-                  </div>
-                </CardContent>
+                <CardContent className="flex items-center justify-between p-4"></CardContent>
               </Card>
             ))}
           </div>
